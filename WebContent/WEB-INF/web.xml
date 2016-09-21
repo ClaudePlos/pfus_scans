@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+ <!--  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>simple</web-resource-name>
+      <url-pattern>/fileuploadservlet</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>users</role-name>
+    </auth-constraint>
+  </security-constraint>
+  <login-config>
+    <auth-method>BASIC</auth-method>
+  </login-config> -->
+  
+  
+  <servlet>
+    <servlet-name>FileUploadDemoServlet</servlet-name>
+    <servlet-class>com.example.FileUploadDemoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileUploadDemoServlet</servlet-name>
+    <url-pattern>/fileuploadservlet</url-pattern>
+  </servlet-mapping>
+  
+	
+	<security-role>
+		<role-name>portalAdmins</role-name>
+	</security-role>
+	<security-role>
+		<role-name>portalManagers</role-name>
+	</security-role>
+	<security-role>
+		<role-name>portalEditors</role-name>
+	</security-role>
+	<security-role>
+		<role-name>portalStats</role-name>
+	</security-role>
+	<security-role>
+		<role-name>portalAuthUser</role-name>
+	</security-role>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>prv</web-resource-name>
+			<description>Portlet pages</description>
+			<url-pattern>/*</url-pattern>			
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>portalAuthUser</role-name>			
+		</auth-constraint>
+
+		<user-data-constraint>
+			<transport-guarantee>NONE</transport-guarantee>
+		</user-data-constraint>
+
+	</security-constraint>
+	
+	<login-config>
+		<auth-method>FORM</auth-method>
+		   <form-login-config>
+		     <form-login-page>/login.html</form-login-page>
+		     <form-error-page>/logonError.html?param=test</form-error-page>
+		  </form-login-config> 
+	</login-config>
+	
+</web-app>
